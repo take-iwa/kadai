@@ -1,0 +1,28 @@
+div {
+	padding: 10px;
+	font-size: 16px;
+}
+
+form fieldset {
+	margin-left: 30px;
+}
+
+form label {
+	width: 800px;
+	padding-left: 20px;
+}
+
+form .textbox {
+	width: 100%;
+	background-color: #eeeeee;
+	border: none;
+	border-bottom: 1px solid;
+}
+
+#submit_button {
+	margin-left: 20px;
+}
+
+.container {
+	padding-left: 40px;
+}

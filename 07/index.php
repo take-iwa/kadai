@@ -3,8 +3,10 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>ブックマーク</title>
+		<script src="./js/bootstrap.min.js"></script>
+		<script src="./js/jquery-2.1.3.min.js"></script>
 		<link href="css/bootstrap.min.css" rel="stylesheet">
-		<style>div{padding: 10px;font-size:16px;}</style>
+		<link href="css/style.css" rel="stylesheet">
 	</head>
 	<body>
 
@@ -12,7 +14,7 @@
 		<header>
 			<nav class="navbar navbar-default">
 				<div class="container-fluid">
-					<div class="navbar-header"><a class="navbar-brand" href="select.php">データ一覧</a></div>
+					<div class="navbar-header"><a class="navbar-brand" href="select.php">＞＞データ一覧</a></div>
 				</div>
 			</nav>
 		</header>
@@ -23,10 +25,10 @@
 			<div class="jumbotron">
 				<fieldset>
 					<legend>ブックマーク</legend>
-					<label>タイトル：<input type="text" name="title"></label><br>
-					<label>URL：<input type="text" name="url"></label><br>
-					<label><textArea name="comment" rows="4" cols="40"></textArea></label><br>
-					<input type="submit" value="送信">
+					<label>タイトル：<input class="textbox" type="text" name="title"></label><br>
+					<label>URL：<input class="textbox" type="text" name="url"></label><br>
+					<label><textArea name="comment" rows="4" cols="80"></textArea></label><br>
+					<input id="submit_button" type="submit" value="送信">
 				</fieldset>
 			</div>
 		</form>

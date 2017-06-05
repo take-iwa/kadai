@@ -22,11 +22,9 @@ if($status==false){
 	//Selectデータの数だけ自動でループしてくれる
 	while( $result = $stmt->fetch(PDO::FETCH_ASSOC)){
 		$view .= "<p>";
-		$view .= $result["id"].", ";
-		$view .= $result["title"].", ";
-		$view .= $result["url"].", ";
-		$view .= $result["comment"].", ";
-		$view .= $result["indate"];
+		$view .= '『<a href="'.$result["url"].'" target="_blank">'.$result["title"].'</a>』　';
+		$view .= $result["comment"]."（";
+		$view .= $result["indate"]."）";
 		$view .= "</p>";
 	}
 
@@ -43,7 +41,7 @@ if($status==false){
 		<title>ブックマーク表示</title>
 		<link rel="stylesheet" href="css/range.css">
 		<link href="css/bootstrap.min.css" rel="stylesheet">
-		<style>div{padding: 10px;font-size:16px;}</style>
+		<link href="css/style.css" rel="stylesheet">
 	</head>
 	<body id="main">
 		<!-- Head[Start] -->
@@ -51,7 +49,7 @@ if($status==false){
 			<nav class="navbar navbar-default">
 				<div class="container-fluid">
 					<div class="navbar-header">
-						<a class="navbar-brand" href="index.php">データ登録</a>
+						<a class="navbar-brand" href="index.php">データ登録＜＜</a>
 					</div>
 				</div>
 			</nav>
