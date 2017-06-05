@@ -27,7 +27,9 @@ form textArea {
 #submit_button {
 	margin-left: 20px;
 	padding: 5px 1em;
+	color: #ffffff;
 	border: none;
+	background-color: #e0531f;
 }
 
 .container {
@@ -45,4 +47,24 @@ form textArea {
 
 .container .book_item p {
 	font-size: 0.9em;
+}
+
+.container .book_item a.edit_button {
+	display: flex;
+	float: right;
+	margin: 0 3px;
+	padding: 5px 10px;
+	color: #ffffff;
+	font-size: 1em;
+	background-color: #e0531f;
+}
+
+.container .book_item a.remove_button {
+	display: flex;
+	float: right;
+	margin: 0 3px;
+	padding: 5px 10px;
+	color: #000000;
+	font-size: 1em;
+	background-color: #d0cece;
 }
