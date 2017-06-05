@@ -21,11 +21,11 @@ if($status==false){
 }else{
 	//Selectデータの数だけ自動でループしてくれる
 	while( $result = $stmt->fetch(PDO::FETCH_ASSOC)){
-		$view .= "<p>";
+		$view .= '<div class="book_item">';
 		$view .= '『<a href="'.$result["url"].'" target="_blank">'.$result["title"].'</a>』　';
-		$view .= $result["comment"]."（";
-		$view .= $result["indate"]."）";
-		$view .= "</p>";
+		$view .= '<p>'.$result["comment"]."（";
+		$view .= $result["indate"]."）</p>";
+		$view .= "</div>";
 	}
 
 }
@@ -38,10 +38,11 @@ if($status==false){
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>ブックマーク表示</title>
+		<title>ブックマーク一覧</title>
 		<link rel="stylesheet" href="css/range.css">
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 		<link href="css/style.css" rel="stylesheet">
+		<link rel="shortcut icon" href="./img/favicon.ico">
 	</head>
 	<body id="main">
 		<!-- Head[Start] -->
@@ -49,7 +50,7 @@ if($status==false){
 			<nav class="navbar navbar-default">
 				<div class="container-fluid">
 					<div class="navbar-header">
-						<a class="navbar-brand" href="index.php">データ登録＜＜</a>
+						<a class="navbar-brand" href="index.php">データ登録＜＜　　</a>
 					</div>
 				</div>
 			</nav>

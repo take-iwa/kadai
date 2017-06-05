@@ -7,6 +7,7 @@
 		<script src="./js/jquery-2.1.3.min.js"></script>
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 		<link href="css/style.css" rel="stylesheet">
+		<link rel="shortcut icon" href="./img/favicon.ico">
 	</head>
 	<body>
 
@@ -27,8 +28,8 @@
 					<legend>ブックマーク</legend>
 					<label>タイトル：<input class="textbox" type="text" name="title"></label><br>
 					<label>URL：<input class="textbox" type="text" name="url"></label><br>
-					<label><textArea name="comment" rows="4" cols="80"></textArea></label><br>
-					<input id="submit_button" type="submit" value="送信">
+					<label>コメント：<textArea name="comment" rows="4" cols="80"></textArea></label><br>
+					<input id="submit_button" type="submit" value="登録">
 				</fieldset>
 			</div>
 		</form>

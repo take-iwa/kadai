@@ -14,15 +14,35 @@ form label {
 
 form .textbox {
 	width: 100%;
-	background-color: #eeeeee;
+	background-color: #f8f8f8;
 	border: none;
-	border-bottom: 1px solid;
+	border-bottom: 1px solid #aaaaaa;
+}
+
+form textArea {
+	background-color: #f8f8f8;
+	border: none;
 }
 
 #submit_button {
 	margin-left: 20px;
+	padding: 5px 1em;
+	border: none;
 }
 
 .container {
-	padding-left: 40px;
+	padding: 2em 3em;
+}
+
+.container .book_item {
+	padding: 1em;
+	border-bottom: 0.5px solid #dddddd;
+}
+
+.container .book_item a {
+	font-size: 1.5em;
+}
+
+.container .book_item p {
+	font-size: 0.9em;
 }
