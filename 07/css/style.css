@@ -24,9 +24,9 @@ form textArea {
 	border: none;
 }
 
-#submit_button {
+.submit_button {
 	margin-left: 20px;
-	padding: 5px 1em;
+	padding: 0.6em 1em;
 	color: #ffffff;
 	border: none;
 	background-color: #e0531f;
@@ -67,4 +67,8 @@ form textArea {
 	color: #000000;
 	font-size: 1em;
 	background-color: #d0cece;
+}
+
+.form-group{
+	padding: 0;
 }

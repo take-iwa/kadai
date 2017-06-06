@@ -1,4 +1,6 @@
 <?php
+$word = $_POST['word'];
+
 //1.  DB接続します
 try {
 	$pdo = new PDO('mysql:dbname=gs_db08;charset=utf8;host=localhost','root','');
@@ -7,7 +9,7 @@ try {
 }
 
 //２．データ登録SQL作成
-$stmt = $pdo->prepare("SELECT * FROM gs_bm_table");
+$stmt = $pdo->prepare("SELECT * FROM gs_bm_table WHERE title LIKE '%".$word."%'");
 //ここにバインド変数の追加　WHERE 使うー。
 $status = $stmt->execute();
 
@@ -44,7 +46,7 @@ if($status==false){
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>ブックマーク一覧</title>
+		<title>ブックマーク検索</title>
 		<link rel="stylesheet" href="css/range.css">
 		<script src="./js/bootstrap.min.js"></script>
 		<script src="./js/jquery-2.1.3.min.js"></script>
@@ -62,13 +64,7 @@ if($status==false){
 			<nav class="navbar navbar-default">
 				<div class="container-fluid">
 					<div class="navbar-header">
-						<a class="navbar-brand" href="index.php">データ登録＜＜</a>
-						<form class="navbar-form navbar-left" role="search" method="post" action="search.php">
-							<div class="form-group">
-								<input type="text" class="form-control" placeholder="検索キーワード" name="word">
-								<input class="submit_button" type="submit" value="検索">
-							</div>
-						</form>
+						<a class="navbar-brand" href="select.php">データ一覧＜＜</a>
 					</div>
 				</div>
 			</nav>
@@ -77,6 +73,9 @@ if($status==false){
 
 		<!-- Main[Start] -->
 		<div>
+			<div>
+				<p>検索ワード：『<?=$word?>』</p>
+			</div>
 			<div class="container jumbotron">
 				<?=$view?>
 			</div>

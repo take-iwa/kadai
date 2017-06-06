@@ -29,7 +29,7 @@
 					<label>タイトル：<input class="textbox" type="text" name="title"></label><br>
 					<label>URL：<input class="textbox" type="text" name="url"></label><br>
 					<label>コメント：<textArea name="comment" rows="4" cols="80"></textArea></label><br>
-					<input id="submit_button" type="submit" value="登録">
+					<input class="submit_button" type="submit" value="登録">
 				</fieldset>
 			</div>
 		</form>
