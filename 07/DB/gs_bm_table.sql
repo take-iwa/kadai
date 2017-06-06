@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: 2017 年 6 月 06 日 00:08
+-- Generation Time: 2017 年 6 月 06 日 22:00
 -- サーバのバージョン： 10.1.21-MariaDB
 -- PHP Version: 5.6.30
 
@@ -32,20 +32,23 @@ CREATE TABLE `gs_bm_table` (
   `url` text COLLATE utf8_unicode_ci NOT NULL,
   `comment` text COLLATE utf8_unicode_ci,
   `indate` datetime NOT NULL,
-  `display` tinyint(1) NOT NULL DEFAULT '1'
+  `display` tinyint(1) NOT NULL DEFAULT '1',
+  `img_url` text COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- テーブルのデータのダンプ `gs_bm_table`
 --
 
-INSERT INTO `gs_bm_table` (`id`, `title`, `url`, `comment`, `indate`, `display`) VALUES
-(1, 'BLAME!', 'https://www.amazon.co.jp/gp/product/B010CQ4GRY/ref=series_rw_dp_sw', '弐瓶勉さんの漫画は、昔っから好き。\r\n映画公開中。', '2017-06-05 19:45:05', 1),
-(2, 'メイドインアビス', 'https://www.amazon.co.jp/gp/product/B01N0UJXO4/ref=series_rw_dp_sw', '絵だけ見るとほんわかな作品かと思いきや、なかなか怖いシーンも多い。モフモフ。', '2017-06-05 20:40:45', 1),
-(3, 'ヒナまつり', 'https://www.amazon.co.jp/gp/product/B06XDPPLMV/ref=series_rw_dp_sw', 'とても笑えます。電車で読んでて思いっきり吹き出して恥ずかしかった。', '2017-06-05 20:46:48', 1),
-(4, 'エリア51', 'https://www.amazon.co.jp/gp/product/B06X3R7568/ref=series_rw_dp_sw', '久正人さんの絵がかっこよくて好き。また、神話・怪談・UMAなど色々なジャンルのキャラが登場するが、巧みに組み合わされていて物語としても面白い。これが好きなら過去の作品も是非。', '2017-06-05 20:54:57', 1),
-(5, '月影ベイベ', 'https://www.amazon.co.jp/gp/product/B072FRKLD9/ref=series_rw_dp_sw', '全然読んでないけど、自分の出身地の祭りが取り上げられていたので気になった。今度読んでみよう。', '2017-06-05 21:04:00', 1),
-(6, '僕らのヒーローアカデミア', 'https://www.amazon.co.jp/gp/product/B071FT7TPQ/ref=series_rw_dp_sw', '努力・友情・勝利の三拍子揃った王道バトルもの。純粋に楽しめる感じがいい。', '2017-06-05 22:59:24', 1);
+INSERT INTO `gs_bm_table` (`id`, `title`, `url`, `comment`, `indate`, `display`, `img_url`) VALUES
+(1, 'BLAME!', 'https://www.amazon.co.jp/gp/product/B010CQ4GRY/ref=series_rw_dp_sw', '弐瓶勉さんの漫画は、昔っから好き。\r\n映画公開中。シボが可愛い。', '2017-06-05 19:45:05', 1, 'https://images-fe.ssl-images-amazon.com/images/I/C1vVhO1x4WS._SL250_FMpng_.png'),
+(2, 'メイドインアビス', 'https://www.amazon.co.jp/gp/product/B01N0UJXO4/ref=series_rw_dp_sw', '絵だけ見るとほんわかな作品かと思いきや、なかなか怖いシーンも多い。モフモフ。', '2017-06-05 20:40:45', 1, 'https://images-fe.ssl-images-amazon.com/images/I/D1MDSoNTKsS._SL250_FMpng_.png'),
+(3, 'ヒナまつり', 'https://www.amazon.co.jp/gp/product/B06XDPPLMV/ref=series_rw_dp_sw', 'とても笑えます。電車で読んでて思いっきり吹き出して恥ずかしかった。', '2017-06-05 20:46:48', 1, 'https://images-fe.ssl-images-amazon.com/images/I/C1D8Dq59pkS._SL250_FMpng_.png'),
+(4, 'エリア51', 'https://www.amazon.co.jp/gp/product/B06X3R7568/ref=series_rw_dp_sw', '久正人さんの絵がかっこよくて好き。また、神話・怪談・UMAなど色々なジャンルのキャラが登場するが、巧みに組み合わされていて物語としても面白い。これが好きなら過去の作品も是非。', '2017-06-05 20:54:57', 1, 'https://images-fe.ssl-images-amazon.com/images/I/B1FyHjLVNHS._SL250_FMpng_.png'),
+(5, '月影ベイベ', 'https://www.amazon.co.jp/gp/product/B072FRKLD9/ref=series_rw_dp_sw', '全然読んでないけど、自分の出身地の祭りが取り上げられていたので気になった。今度読んでみよう。', '2017-06-05 21:04:00', 1, 'https://images-fe.ssl-images-amazon.com/images/I/B1OH0Iu5g0S._SL250_FMpng_.png'),
+(6, '僕らのヒーローアカデミア', 'https://www.amazon.co.jp/gp/product/B071FT7TPQ/ref=series_rw_dp_sw', '努力・友情・勝利の三拍子揃った王道バトルもの。純粋に楽しめる感じがいい。', '2017-06-05 22:59:24', 1, 'https://images-fe.ssl-images-amazon.com/images/I/C1uRsIUzzfS._SL250_FMpng_.png'),
+(7, '闇金ウシジマくん', 'https://www.amazon.co.jp/gp/product/B072PSXX73/ref=series_rw_dp_sw', '人間て面白いなぁと。', '2017-06-06 21:54:00', 1, 'https://images-fe.ssl-images-amazon.com/images/I/B19gAQCKIpS._SL250_FMpng_.png'),
+(8, 'キングダム', 'https://www.amazon.co.jp/gp/product/B071CG819L/ref=series_rw_dp_sw', 'アニメ面白かったよ。', '2017-06-06 21:57:30', 1, 'https://images-fe.ssl-images-amazon.com/images/I/C1a3Jkfd2BS._SL250_FMpng_.png');
 
 --
 -- Indexes for dumped tables
@@ -65,7 +68,7 @@ ALTER TABLE `gs_bm_table`
 -- AUTO_INCREMENT for table `gs_bm_table`
 --
 ALTER TABLE `gs_bm_table`
-  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

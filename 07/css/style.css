@@ -32,8 +32,19 @@ form textArea {
 	background-color: #e0531f;
 }
 
+.search_btn{
+	border-radius: 5px;
+	border: 1px solid #ffffff;
+}
+
 .container {
 	padding: 2em 3em;
+}
+
+.book_img{
+	width: 150px;
+	height: auto;
+	display: inline;
 }
 
 .container .book_item {
@@ -46,6 +57,7 @@ form textArea {
 }
 
 .container .book_item p {
+	margin-top: 20px;
 	font-size: 0.9em;
 }
 

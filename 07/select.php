@@ -1,4 +1,5 @@
 <?php
+
 //1.  DB接続します
 try {
 	$pdo = new PDO('mysql:dbname=gs_db08;charset=utf8;host=localhost','root','');
@@ -23,6 +24,7 @@ if($status==false){
 	while( $result = $stmt->fetch(PDO::FETCH_ASSOC)){
 		if($result['display'] == 1){
 			$view .= '<div id="book_item'.$result["id"].'" class="book_item">';
+			$view .= '<a href="'.$result["url"].'" target="_blank"><img class="book_img" src="'.$result["img_url"].'"></a>';
 			$view .= '『<a href="'.$result["url"].'" target="_blank">'.$result["title"].
 				'</a>』<a class="remove_button" onclick="remove_data('.$result["id"].
 				')" href="#">削除</a><a class="edit_button" href="edit.php?arg='.$result["id"].
@@ -66,7 +68,7 @@ if($status==false){
 						<form class="navbar-form navbar-left" role="search" method="post" action="search.php">
 							<div class="form-group">
 								<input type="text" class="form-control" placeholder="検索キーワード" name="word">
-								<input class="submit_button" type="submit" value="検索">
+								<input class="submit_button search_btn" type="submit" value="検索">
 							</div>
 						</form>
 					</div>
