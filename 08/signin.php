@@ -16,11 +16,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	if (!$user_id = getUserId($email, $password, $db)) {
 		$error = 'パスワードとメールアドレスが正しくありません';
 	} else if (empty($error)) {
-		session_regenerate_id(true);
-		$_SESSION['user_id'] = $user_id;
-		$index_url = "index.php";
-		header("Location: {$index_url}");
-		exit;
+		if($life_flg = getLifeFlg($user_id, $db)){
+			$error = 'アカウントがブロックされています';
+		}else{
+			session_regenerate_id(true);
+			$_SESSION['user_id'] = $user_id;
+			$index_url = "index.php";
+			header("Location: {$index_url}");
+			exit;
+		}
 	}
 }
 ?>
