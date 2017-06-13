@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		if($password != ''){
 			$hash = password_hash($password, PASSWORD_DEFAULT);
 
-			$sql = 'UPDATE gs_user_table SET name=:name, lid=:lid, email=:email lpw=:password WHERE id='.$_SESSION['user_id'];
+			$sql = 'UPDATE gs_user_table SET name=:name, lid=:lid, email=:email, lpw=:password WHERE id='.$_SESSION['user_id'];
 
 			$statement = $db->prepare($sql);
 

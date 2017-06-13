@@ -80,7 +80,7 @@ if($status==false){
 				</div>
 				<!-- パスワード -->
 				<div class="form-group">
-					<label for="password" style="padding:0;">新しいパスワード（必須）</label>
+					<label for="password" style="padding:0;">新しいパスワード（任意）</label>
 					<input type="password" class="form-control" id="password" name="password" placeholder="4文字以上8文字以下"/>
 				</div>
 				<!-- 更新ボタン -->
