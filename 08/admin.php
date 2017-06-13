@@ -24,7 +24,7 @@ if($status==false){
 		if($result["life_flg"] == 0){
 			$view .= 'btn-danger"';
 		}else{
-			$view .= 'btn-default"';
+			$view .= 'btn-success"';
 		}
 		$view .= ' onclick="block_user('.$result["id"].','.$result["life_flg"].')" href="#"><span class="glyphicon ';
 		if($result["life_flg"] == 0){
@@ -38,7 +38,13 @@ if($status==false){
 		}else{
 			$view .= 'ブロック解除';
 		}
-		$view .= "</a></td></tr>";
+		$view .= '</a></td><td>';
+		if($result["kanri_flg"]){
+			$view .= '<span class="glyphicon glyphicon-tower" aria-hidden="true" style="color:#000;padding-top:8px;"></span> 管理者';
+		}else{
+			$view .= '<span class="glyphicon glyphicon-user" aria-hidden="true" style="color:#000;padding-top:8px;"></span> 一般ユーザ';
+		}
+		$view .= '</td></tr>';
 	}
 
 }
@@ -78,12 +84,14 @@ if($status==false){
 		<!-- Head[End] -->
 
 		<!-- Main[Start] -->
+		<h1 style="padding-left:20px;">ユーザーリスト</h1>
 		<table class="table table-striped">
 			<tr>
 				<th class="name" style="padding-left:30px;">ユーザー名</th>
 				<th class="nickname">ニックネーム</th>
 				<th class="email">Eメールアドレス</th>
-				<th></th>
+				<th style="width:200px;">操作</th>
+				<th>権限</th>
 			</tr>
 			<?=$view?>
 		</table>
