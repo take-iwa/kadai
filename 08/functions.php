@@ -24,6 +24,7 @@ function getUserId($email, $password, $db) {
 	}
 }
 
+//ニックネーム取得
 function getNickName($sender_id, $db) {
 	$sql = "SELECT lid FROM gs_user_table WHERE id=:sender";
 	$statement = $db->prepare($sql);
@@ -31,6 +32,16 @@ function getNickName($sender_id, $db) {
 	$statement->execute();
 	$row = $statement->fetch();
 	return $row['lid'];
+}
+
+//管理者権限取得
+function getAdminFlg($sender_id, $db) {
+	$sql = "SELECT kanri_flg FROM gs_user_table WHERE id=:sender";
+	$statement = $db->prepare($sql);
+	$statement->bindValue(':sender', $sender_id, PDO::PARAM_INT);
+	$statement->execute();
+	$row = $statement->fetch();
+	return $row['kanri_flg'];
 }
 
 //XSS対策
