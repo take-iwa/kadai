@@ -15,7 +15,7 @@ $pdo = connectDb();
 
 //３．データ登録SQL作成
 $stmt = $pdo->prepare("INSERT INTO gs_bm_table(id, title, url, sender, comment,
-indate, display, img_url, point, other_comment )VALUES(NULL, :title, :url, :sender, :comment, sysdate(), 1, :img_url, 0, 'みんなのコメント')");
+indate, display, img_url, point, other_comment )VALUES(NULL, :title, :url, :sender, :comment, sysdate(), 1, :img_url, 0, '＜みんなのコメント＞')");
 //セキュリティ対策(":〇〇" ・・・ バインド変数と言う)
 $stmt->bindValue(':title', $title, PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)
 $stmt->bindValue(':url', $url, PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)
