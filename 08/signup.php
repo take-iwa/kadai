@@ -70,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 			<div class="row">
 				<div class="col-md-4 col-md-push-4">
 					<img src="./img/bookmarker.png" alt="bookmark">
-					<h1>新規登録</h1>
+					<h1 hidden>新規登録</h1>
 					<!-- フォーム部分 -->
 					<form action="./signup.php" method="POST">
 						<!-- ユーザ名 -->

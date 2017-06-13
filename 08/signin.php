@@ -46,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 			<div class="row">
 				<div class="col-md-4 col-md-push-4">
 					<img src="./img/bookmarker.png" alt="bookmark">
-					<h1>サインイン</h1>
+					<h1 hidden>サインイン</h1>
 					<form action="signin.php" method="POST">
 						<div class="form-group">
 							<label for="inputEmail" style="padding:0;">メールアドレス</label>
