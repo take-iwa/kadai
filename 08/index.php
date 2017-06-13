@@ -27,14 +27,16 @@ if($status==false){
 }else{
 	//Selectデータの数だけ自動でループしてくれる
 	while( $result = $stmt->fetch(PDO::FETCH_ASSOC)){
-		if($result['display'] == 1){
+		$life = getLifeFlg($result['sender'], $pdo);
+		if($result['display'] == 1 && $life == 0){
 			if($result['sender'] == $_SESSION['user_id'] ){
 				$view .= '<div id="book_item'.$result["id"].'" class="book_item">';
 				$view .= '<a href="'.$result["url"].'" target="_blank"><img class="book_img" src="'.$result["img_url"].'"></a>';
 				$view .= '『<a href="'.$result["url"].'" target="_blank">'.$result["title"].
 					'</a>』<div class="point">'.$result["point"].'  <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true" style="padding-top:14px;"></span></div><a class="btn remove_button" onclick="remove_data('.$result["id"].
 					')" href="#"><span class="glyphicon glyphicon-trash" aria-hidden="true" style="padding-top:3px;"></span>削除</a><a class="btn edit_button" href="edit.php?arg='.$result["id"].
-					'"><span class="glyphicon glyphicon-edit" aria-hidden="true" style="padding-top:3px;"></span>編集</a>';
+					'"><span class="glyphicon glyphicon-edit" aria-hidden="true" style="padding-top:3px;"></span>編集</a>
+					<a class="comment_button btn" href="comment.php?arg='.$result["id"].'"><span class="glyphicon glyphicon-comment" aria-hidden="true" style="padding-top:3px;"></span>コメントする</a>';
 				$view .= '<p>'.$result["comment"].'( ★'.$_SESSION['nickname'].' / '.$result["indate"].'）</p>';
 				$view .= '<hr style="border:none;border-top:1px dashed #f0bdaa;">';
 				$view .= '<p>'.$result["other_comment"].'</p>';
@@ -53,7 +55,6 @@ if($status==false){
 			}
 		}
 	}
-
 }
 ?>
 
@@ -84,22 +85,27 @@ if($status==false){
 				<div class="container-fluid">
 					<div class="navbar-header">
 						<a class="navbar-brand" href="#"><img src="./img/bookmarker.png" alt="bookmark" width="150px" style="margin:-20px 5px 0 0;"></a>
-						<a class="navbar-brand" href="input.php" style="margin-top:3px;">データ登録＜＜</a>
+						<a class="navbar-brand" href="input.php" style="margin-top:3px;">ブックマーク登録＜＜</a>
 						<form class="navbar-form navbar-left" role="search" method="post" action="search.php">
 							<div class="form-group">
 								<input type="text" class="form-control" placeholder="タイトル検索" name="word">
 								<input class="submit_button search_btn" type="submit" value="検索">
 							</div>
 						</form>
-						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#gnavi">
-							<span class="sr-only">メニュー</span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-						</button>
-						<div class="navbar-right">
+						<div class="nav navbar-nav navbar-right">
 							<p style="color:#f8f8f8;">ようこそ
-								<?=$_SESSION['nickname']?>さん　<a href="./signout.php"><span class="glyphicon glyphicon-log-out" aria-hidden="true" style="color:#f8f8f8;padding-top:8px;"></span>サインアウト</a></p>
+								<?=$_SESSION['nickname']?>さん　<span></span>
+									<?php
+									//管理者の場合、ユーザー管理画面へのリンク表示
+									if($_SESSION['kanri_flg']){
+										echo '<a href="./admin.php" style="color:#f8f8f8"><span class="glyphicon glyphicon-tower" aria-hidden="true" style="color:#f8f8f8;padding-top:8px;"></span> 管理画面　</a>';
+									}
+								?>
+										<a href="./profile.php" style="color:#f8f8f8"><span class="glyphicon glyphicon-user" aria-hidden="true" style="color:#f8f8f8;padding-top:8px;"></span> プロフィール　</a>
+										<a href="./signout.php" style="color:#f8f8f8">
+											<span class="glyphicon glyphicon-log-out" aria-hidden="true" style="color:#f8f8f8;padding-top:8px;"></span> サインアウト
+										</a>
+							</p>
 						</div>
 					</div>
 				</div>

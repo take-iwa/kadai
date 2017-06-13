@@ -33,17 +33,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 			header("Location: {$signin_url}");
 			exit;
 		} else {
-			//TODO:アラート
-			//echo '<script type="text/javascript">
-      //    sweetAlert("Error", "登録に失敗しました。", "error");
-      //</script>';
+			echo "登録に失敗しました。";
 		}
 		
 	} else {
-		//TODO:アラート
-		//echo '<script type="text/javascript">
-    //      sweetAlert("Error", "値が入力されていません", "error");
-    //  </script>';
+		echo "値が入力されていません";
 	}
 }
 ?>

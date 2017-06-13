@@ -50,3 +50,55 @@ function sendRequest(book_id) {
 
 	}
 }
+
+// ブロック確認アラート表示
+function block_user(user_id, life) {
+	if (life == 0) {
+		swal({
+				title: "本当にいいんですか？",
+				text: "ブロック解除もできます。",
+				type: "warning",
+				showCancelButton: true,
+				confirmButtonColor: "#DD6B55",
+				confirmButtonText: "いいよ!",
+				closeOnConfirm: false
+			},
+			function () {
+				sendBlockRequest(user_id, 1);
+				swal({
+					title: "ブロックしました!",
+					text: "該当ユーザーのブックマークも表示されなくなります。",
+					confirmButtonText: "OK!",
+					closeOnConfirm: false
+				},tglBlockButton(user_id, life));
+			
+		});
+	} else {
+		sendBlockRequest(user_id, 0);
+		swal({
+			title: "ブロック解除しました!",
+			text: "該当ユーザーのブックマークも表示されます。",
+			confirmButtonText: "OK!",
+			closeOnConfirm: false
+		},tglBlockButton(user_id, life));
+	}
+}
+
+
+// ブロック送信リクエスト
+function sendBlockRequest(user_id, block) {
+	var xmlhttp = createXmlHttpRequest();
+	if (xmlhttp != null) {
+		xmlhttp.open("POST", "./remove_user.php", false);
+		xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+		xmlhttp.send('id=' + user_id + '&block=' + block);
+	}
+}
+
+function tglBlockButton(user_id, flg){
+	if(!flg){
+		$('#block_' + user_id).html('<span class="glyphicon glyphicon-ok-circle" aria-hidden="true" style="padding-top:3px;"></span>ブロック解除').removeClass("btn-danger").addClass("btn-default");
+	}else{
+		$('#block_' + user_id).html('<span class="glyphicon glyphicon-ban-circle" aria-hidden="true" style="padding-top:3px;"></span>ブロック').removeClass("btn-default").addClass("btn-danger");
+	}
+}

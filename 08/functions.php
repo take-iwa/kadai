@@ -44,6 +44,16 @@ function getAdminFlg($sender_id, $db) {
 	return $row['kanri_flg'];
 }
 
+//ブロック取得
+function getLifeFlg($sender_id, $db) {
+	$sql = "SELECT life_flg FROM gs_user_table WHERE id=:sender";
+	$statement = $db->prepare($sql);
+	$statement->bindValue(':sender', $sender_id, PDO::PARAM_INT);
+	$statement->execute();
+	$row = $statement->fetch();
+	return $row['life_flg'];
+}
+
 //XSS対策
 function escape($s) {
 	return htmlspecialchars($s, ENT_QUOTES, "UTF-8");
@@ -59,6 +69,7 @@ function isSignin()
 	}
 }
 
+//Amazonのページのみに対応
 function scrapAmazonPage($url){
 	//ウェブページのデータを読み込み
 	
