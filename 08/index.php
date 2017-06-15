@@ -112,9 +112,14 @@ if($status==false){
 			</nav>
 		</header>
 		<!-- Head[End] -->
+		
+		<!-- Top_Img -->
+		<div class="top_img">
+		</div>
+		<!-- Top_Img[End] -->
 
 		<!-- Main[Start] -->
-		<div>
+		<div id="book_list">
 			<div class="container jumbotron">
 				<?=$view?>
 			</div>
