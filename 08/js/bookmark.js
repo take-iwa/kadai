@@ -66,21 +66,29 @@ function block_user(user_id, life) {
 			function () {
 				sendBlockRequest(user_id, 1);
 				swal({
-					title: "ブロックしました!",
-					text: "該当ユーザーのブックマークも表示されなくなります。",
-					confirmButtonText: "OK!",
-					closeOnConfirm: false
-				},tglBlockButton(user_id, life));
-			
-		});
+						title: "ブロックしました!",
+						text: "該当ユーザーのブックマークも表示されなくなります。",
+						confirmButtonText: "OK!",
+						closeOnConfirm: false
+					},
+					function () {
+						tglBlockButton(user_id, life);
+						location.reload();
+					});
+
+			});
 	} else {
 		sendBlockRequest(user_id, 0);
 		swal({
-			title: "ブロック解除しました!",
-			text: "該当ユーザーのブックマークも表示されます。",
-			confirmButtonText: "OK!",
-			closeOnConfirm: false
-		},tglBlockButton(user_id, life));
+				title: "ブロック解除しました!",
+				text: "該当ユーザーのブックマークも表示されます。",
+				confirmButtonText: "OK!",
+				closeOnConfirm: false
+			},
+			function () {
+				tglBlockButton(user_id, life);
+				location.reload();
+			});
 	}
 }
 
@@ -95,10 +103,10 @@ function sendBlockRequest(user_id, block) {
 	}
 }
 
-function tglBlockButton(user_id, flg){
-	if(!flg){
-		$('#block_' + user_id).html('<span class="glyphicon glyphicon-ok-circle" aria-hidden="true" style="padding-top:3px;"></span>ブロック解除').removeClass("btn-danger").addClass("btn-default");
-	}else{
-		$('#block_' + user_id).html('<span class="glyphicon glyphicon-ban-circle" aria-hidden="true" style="padding-top:3px;"></span>ブロック').removeClass("btn-default").addClass("btn-danger");
+function tglBlockButton(user_id, flg) {
+	if (!flg) {
+		$('#block_' + user_id).html('<span class="glyphicon glyphicon-ok-circle" aria-hidden="true" style="padding-top:3px;"></span>ブロック解除').removeClass("btn-danger").addClass("btn-success");
+	} else {
+		$('#block_' + user_id).html('<span class="glyphicon glyphicon-ban-circle" aria-hidden="true" style="padding-top:3px;"></span>ブロック').removeClass("btn-success").addClass("btn-danger");
 	}
 }
