@@ -1,6 +1,9 @@
 <?php
 require_once 'init.php';
 
+//セクションチェック
+sessChk();
+
 //1.  DB接続します
 $pdo = connectDb();
 

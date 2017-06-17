@@ -21,6 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		}else{
 			session_regenerate_id(true);
 			$_SESSION['user_id'] = $user_id;
+			$_SESSION['sess_id'] = session_id();
 			$index_url = "index.php";
 			header("Location: {$index_url}");
 			exit;

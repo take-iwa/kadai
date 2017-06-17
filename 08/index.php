@@ -1,10 +1,8 @@
 <?php
 require_once('init.php');
 
-if(!$_SESSION['user_id']){
-	header("Location: signin.php");
-	exit;
-}
+//セクションチェック
+sessChk();
 
 //1.  DB接続します
 $pdo = connectDb();

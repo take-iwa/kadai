@@ -1,6 +1,14 @@
 <?php
 require_once('simple_html_dom.php');
 
+//セクションチェック
+function sessChk(){
+	if(!$_SESSION['sess_id']){
+		header("Location: signin.php");
+		exit;
+	}
+}
+
 //DB接続
 function connectDb() {
 	try {

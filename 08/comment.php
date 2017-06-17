@@ -1,6 +1,9 @@
 <?php
 require_once('init.php');
 
+//セクションチェック
+sessChk();
+
 //1. POSTデータ取得
 $bookID = $_GET['arg'];
 
