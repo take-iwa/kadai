@@ -1,9 +1,6 @@
 <?php
 require_once('init.php');
 
-//セクションチェック
-sessChk();
-
 // 検索ワード取得
 $word = $_POST['word'];
 
@@ -16,28 +13,13 @@ $stmt = $pdo->prepare("SELECT * FROM gs_bm_table WHERE title LIKE '%".$word."%'"
 $status = $stmt->execute();
 
 //３．データ表示
-$view="";
 if($status==false){
 	//execute（SQL実行時にエラーがある場合）
 	$error = $stmt->errorInfo();
 	exit("ErrorQuery:".$error[2]);
 
 }else{
-	//Selectデータの数だけ自動でループしてくれる
-	while( $result = $stmt->fetch(PDO::FETCH_ASSOC)){
-		if($result['display'] == 1){
-			$view .= '<div id="book_item'.$result["id"].'" class="book_item">';
-			$view .= '<a href="'.$result["url"].'" target="_blank"><img class="book_img" src="'.$result["img_url"].'"></a>';
-			$view .= '『<a href="'.$result["url"].'" target="_blank">'.$result["title"].
-				'</a>』<a class="remove_button" onclick="remove_data('.$result["id"].
-				')" href="#">削除</a><a class="edit_button" href="edit.php?arg='.$result["id"].
-				'">編集</a>';
-			$view .= '<p>'.$result["comment"]."（";
-			$view .= $result["indate"]."）</p>";
-			$view .= "</div>";
-		}
-	}
-
+	$view = setItemView($pdo, $stmt);
 }
 ?>
 

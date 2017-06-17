@@ -1,58 +1,25 @@
 <?php
 require_once('init.php');
 
-//セクションチェック
-sessChk();
-
 //1.  DB接続します
 $pdo = connectDb();
-
-$_SESSION['nickname'] = getNickName($_SESSION['user_id'], $pdo);
-$_SESSION['kanri_flg'] = getAdminFlg($_SESSION['user_id'], $pdo);
-
+if(isSignin()){
+	$_SESSION['nickname'] = getNickName($_SESSION['user_id'], $pdo);
+	$_SESSION['kanri_flg'] = getAdminFlg($_SESSION['user_id'], $pdo);
+}
 //２．データ登録SQL作成
 $stmt = $pdo->prepare("SELECT * FROM gs_bm_table");
 //ここにバインド変数の追加　WHERE 使うー。
 $status = $stmt->execute();
 
 //３．データ表示
-$view="";
 if($status==false){
 	//execute（SQL実行時にエラーがある場合）
 	$error = $stmt->errorInfo();
 	exit("ErrorQuery:".$error[2]);
 
 }else{
-	//Selectデータの数だけ自動でループしてくれる
-	while( $result = $stmt->fetch(PDO::FETCH_ASSOC)){
-		$life = getLifeFlg($result['sender'], $pdo);
-		if($result['display'] == 1 && $life == 0){
-			if($result['sender'] == $_SESSION['user_id'] ){
-				$view .= '<div id="book_item'.$result["id"].'" class="book_item">';
-				$view .= '<a href="'.$result["url"].'" target="_blank"><img class="book_img" src="'.$result["img_url"].'"></a>';
-				$view .= '『<a href="'.$result["url"].'" target="_blank">'.$result["title"].
-					'</a>』<div class="point">'.$result["point"].'  <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true" style="padding-top:14px;"></span></div><a class="btn remove_button" onclick="remove_data('.$result["id"].
-					')" href="#"><span class="glyphicon glyphicon-trash" aria-hidden="true" style="padding-top:3px;"></span>削除</a><a class="btn edit_button" href="edit.php?arg='.$result["id"].
-					'"><span class="glyphicon glyphicon-edit" aria-hidden="true" style="padding-top:3px;"></span>編集</a>
-					<a class="comment_button btn" href="comment.php?arg='.$result["id"].'"><span class="glyphicon glyphicon-comment" aria-hidden="true" style="padding-top:3px;"></span>コメントする</a>';
-				$view .= '<p>'.$result["comment"].'( ★'.$_SESSION['nickname'].' / '.$result["indate"].'）</p>';
-				$view .= '<hr style="border:none;border-top:1px dashed #f0bdaa;">';
-				$view .= '<p>'.$result["other_comment"].'</p>';
-				$view .= "</div>";
-			}else{
-				$other_sender = getNickName($result['sender'], $pdo);
-				$view .= '<div id="book_item'.$result["id"].'" class="book_item">';
-				$view .= '<a href="'.$result["url"].'" target="_blank"><img class="book_img" src="'.$result["img_url"].'"></a>';
-				$view .= '『<a href="'.$result["url"].'" target="_blank">'.$result["title"].'</a>』<div class="point">'.$result["point"].'  <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true" style="padding-top:14px;"></span></div>';
-				$view .= '<a class="good_button btn" href="good.php?arg='.$result["id"].'"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true" style="padding-top:3px;"></span>いいね！</a>';
-				$view .= '<a class="comment_button btn" href="comment.php?arg='.$result["id"].'"><span class="glyphicon glyphicon-comment" aria-hidden="true" style="padding-top:3px;"></span>コメントする</a>';
-				$view .= '<p>'.$result["comment"].'( ★'.$other_sender.'さん / '.$result["indate"].'）</p>';
-				$view .= '<hr style="border:none;border-top:1px dashed #f0bdaa;">';
-				$view .= '<p>'.$result["other_comment"].'</p>';
-				$view .= "</div>";
-			}
-		}
-	}
+	$view = setItemView($pdo, $stmt);
 }
 ?>
 
@@ -83,34 +50,39 @@ if($status==false){
 				<div class="container-fluid">
 					<div class="navbar-header">
 						<a class="navbar-brand" href="#"><img src="./img/bookmarker.png" alt="bookmark" width="150px" style="margin:-20px 5px 0 0;"></a>
-						<a class="navbar-brand" href="input.php" style="margin-top:3px;">ブックマーク登録＜＜</a>
+						<?php
+							if(isSignin()){
+								echo '<a class="navbar-brand" href="input.php" style="margin-top:3px;">ブックマーク登録＜＜</a>';
+							}else{
+								echo '<a class="navbar-brand" href="signin.php" style="margin-top:3px;"><span class="glyphicon glyphicon-log-in" aria-hidden="true" style="color:#f8f8f8;"></span> サインイン</a>';
+							}
+						?>
 						<form class="navbar-form navbar-left" role="search" method="post" action="search.php">
 							<div class="form-group">
 								<input type="text" class="form-control" placeholder="タイトル検索" name="word">
 								<input class="submit_button search_btn" type="submit" value="検索">
 							</div>
 						</form>
-						<div class="nav navbar-nav navbar-right">
-							<p style="color:#f8f8f8;">ようこそ
-								<?=$_SESSION['nickname']?>さん　<span></span>
-									<?php
-									//管理者の場合、ユーザー管理画面へのリンク表示
-									if($_SESSION['kanri_flg']){
-										echo '<a href="./admin.php" style="color:#f8f8f8"><span class="glyphicon glyphicon-tower" aria-hidden="true" style="color:#f8f8f8;padding-top:8px;"></span> 管理画面　</a>';
-									}
-								?>
-										<a href="./profile.php" style="color:#f8f8f8"><span class="glyphicon glyphicon-user" aria-hidden="true" style="color:#f8f8f8;padding-top:8px;"></span> プロフィール　</a>
-										<a href="./signout.php" style="color:#f8f8f8">
-											<span class="glyphicon glyphicon-log-out" aria-hidden="true" style="color:#f8f8f8;padding-top:8px;"></span> サインアウト
-										</a>
-							</p>
-						</div>
+						<?php
+							if(isSignin()){
+								echo '<div class="nav navbar-nav navbar-right">';
+								echo '<p style="color:#f8f8f8;">ようこそ';
+								echo $_SESSION['nickname'].'さん<span></span>';
+								//管理者の場合、ユーザー管理画面へのリンク表示
+								if($_SESSION['kanri_flg']){
+									echo '<a href="./admin.php" style="color:#f8f8f8"><span class="glyphicon glyphicon-tower" aria-hidden="true" style="color:#f8f8f8;padding-top:8px;"></span> 管理画面　</a>';
+								}
+								echo '<a href="./profile.php" style="color:#f8f8f8"><span class="glyphicon glyphicon-user" aria-hidden="true" style="color:#f8f8f8;padding-top:8px;"></span> プロフィール　</a>';
+								echo '<a href="./signout.php" style="color:#f8f8f8">';
+								echo '<span class="glyphicon glyphicon-log-out" aria-hidden="true" style="color:#f8f8f8;padding-top:8px;"></span> サインアウト</a></p></div>';
+							}
+						?>
 					</div>
 				</div>
 			</nav>
 		</header>
 		<!-- Head[End] -->
-		
+
 		<!-- Top_Img -->
 		<div class="top_img">
 		</div>

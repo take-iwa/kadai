@@ -12,6 +12,6 @@ if (isset($_COOKIE[session_name()])){
 // セッションの破壊
 session_destroy();
 
-$signin_url = "signin.php";
-header("Location: {$signin_url}");
+$index_url = "index.php";
+header("Location: {$index_url}");
 ?>

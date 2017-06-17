@@ -67,6 +67,7 @@ function escape($s) {
 	return htmlspecialchars($s, ENT_QUOTES, "UTF-8");
 }
 
+//ユーザーか否か
 function isSignin()
 {
 	if (!isset($_SESSION['user_id'])) {
@@ -90,5 +91,35 @@ function scrapAmazonPage($url){
 	unset($html);
 	
 	return $book_img_url;
+}
+
+//ブックマーク表示リストの作成
+function setItemView($pdo, $stmt){
+	$view = '';
+	//Selectデータの数だけ自動でループしてくれる
+	while( $result = $stmt->fetch(PDO::FETCH_ASSOC)){
+		$life = getLifeFlg($result['sender'], $pdo);
+		if($result['display'] == 1 && $life == 0){
+			$view .= '<div id="book_item'.$result["id"].'" class="book_item">';
+			$view .= '<a href="'.$result["url"].'" target="_blank"><img class="book_img" src="'.$result["img_url"].'"></a>';
+			$view .= '『<a href="'.$result["url"].'" target="_blank">'.$result["title"].
+				'</a>』<div class="point">'.$result["point"].'  <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true" style="padding-top:14px;"></span></div>';
+			if(isSignin()){
+				if($result['sender'] == $_SESSION['user_id'] ){
+					$view .= '<a class="btn remove_button" onclick="remove_data('.$result["id"].')" href="#"><span class="glyphicon glyphicon-trash" aria-hidden="true" style="padding-top:3px;"></span>削除</a>';
+					$view .= '<a class="btn edit_button" href="edit.php?arg='.$result["id"].'"><span class="glyphicon glyphicon-edit" aria-hidden="true" style="padding-top:3px;"></span>編集</a>';
+				}else{
+					$view .= '<a class="good_button btn" href="good.php?arg='.$result["id"].'"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true" style="padding-top:3px;"></span>いいね！</a>';
+				}
+				$view .= '<a class="comment_button btn" href="comment.php?arg='.$result["id"].'"><span class="glyphicon glyphicon-comment" aria-hidden="true" style="padding-top:3px;"></span>コメントする</a>';
+			}
+			$sender_name = getNickName($result['sender'], $pdo);
+			$view .= '<p>'.$result["comment"].'( ★'.$sender_name.'さん / '.$result["indate"].'）</p>';
+			$view .= '<hr style="border:none;border-top:1px dashed #f0bdaa;">';
+			$view .= '<p>'.$result["other_comment"].'</p>';
+			$view .= "</div>";
+		}
+	}
+	return $view;
 }
 ?>
