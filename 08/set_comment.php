@@ -1,6 +1,11 @@
 <?php
 require_once('init.php');
 
+if(!$_SESSION['user_id']){
+	header("Location: signin.php");
+	exit;
+}
+
 //1. POSTデータ取得
 $comment = $_POST["comment"];
 $bookID = $_POST['id'];

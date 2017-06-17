@@ -1,6 +1,12 @@
 <?php
 require_once('init.php');
 
+if(!$_SESSION['user_id']){
+	header("Location: signin.php");
+	exit;
+}
+
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	if ((isset($_POST['user_name']) && $_POST['user_name'] !== '') && 
 			(isset($_POST['screen_name']) && $_POST['screen_name'] !== '') && 

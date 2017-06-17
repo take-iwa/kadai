@@ -1,6 +1,11 @@
 <?php
 require_once('init.php');
 
+if(!$_SESSION['user_id']){
+	header("Location: signin.php");
+	exit;
+}
+
 // 検索ワード取得
 $word = $_POST['word'];
 

@@ -1,3 +1,13 @@
+<?php
+require_once 'init.php';
+
+if(!$_SESSION['user_id']){
+	header("Location: signin.php");
+	exit;
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="ja">
 	<head>
