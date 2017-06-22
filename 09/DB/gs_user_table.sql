@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: 2017 年 6 月 13 日 21:32
+-- Generation Time: 2017 年 6 月 23 日 08:29
 -- サーバのバージョン： 10.1.21-MariaDB
 -- PHP Version: 5.6.30
 
@@ -31,7 +31,7 @@ CREATE TABLE `gs_user_table` (
   `name` varchar(64) COLLATE utf8_unicode_ci DEFAULT NULL,
   `lid` varchar(128) COLLATE utf8_unicode_ci DEFAULT NULL,
   `email` varchar(128) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `lpw` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `lpw` varchar(1024) COLLATE utf8_unicode_ci DEFAULT NULL,
   `kanri_flg` int(1) NOT NULL DEFAULT '0',
   `life_flg` int(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -42,7 +42,8 @@ CREATE TABLE `gs_user_table` (
 
 INSERT INTO `gs_user_table` (`id`, `name`, `lid`, `email`, `lpw`, `kanri_flg`, `life_flg`) VALUES
 (1, 'ooiwa', 'iwaiwa', 'aaa@aaa.us', '$2y$10$oqeKsEB4aImy7KVqyX9lPucx32SEs02ZBiFAiOhzvFBsBza.Vamku', 1, 0),
-(3, 'takebe', 'take', 'bbb@bbb.com', '$2y$10$P1jWYiknBCfp7m5XCqZbiuXTYqq9xR/Q0UhTgZcW9wrSXO1jEm27i', 0, 0);
+(3, 'takebe', 'take', 'bbb@bbb.com', '$2y$10$P1jWYiknBCfp7m5XCqZbiuXTYqq9xR/Q0UhTgZcW9wrSXO1jEm27i', 0, 0),
+(4, 'ababababa', 'kacchan', 'ccc@ccc.net', '$2y$10$ATrtKpqrrMJE1cEqNfzH7ONYBmRlhSMt9Bh0zS81KqDHqa1LTcfBq', 0, 0);
 
 --
 -- Indexes for dumped tables
@@ -63,7 +64,7 @@ ALTER TABLE `gs_user_table`
 -- AUTO_INCREMENT for table `gs_user_table`
 --
 ALTER TABLE `gs_user_table`
-  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
