@@ -30,7 +30,15 @@ if($status==false){
 				<legend>コメント投稿</legend>
 					<input type="number" name="id" value="'.$result['id'].'" hidden>
 					<p>タイトル：'.$result['title'].'</p><br>
-					<label>コメント：<textArea name="comment" rows="4" cols="80"></textArea></label><br>
+					<label>コメント：<textarea name="comment" id="editor1" rows="10" cols="80">
+						コメントをどうぞ！
+						</textarea></label><br>
+					<script>
+						// Replace the <textarea id="editor1"> with a CKEditor
+						// instance, using default configuration.
+						CKEDITOR.replace('editor1');
+
+					</script>
 					<input id="submit_button" type="submit" value="投稿">
 				</fieldset>
 			</div>
@@ -51,6 +59,7 @@ if($status==false){
 		<script src="./js/jquery-2.1.3.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 		<script src="./js/sweetalert.min.js"></script>
+		<script src="./ckeditor/ckeditor.js"></script>
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 		<link href="css/style.css" rel="stylesheet">
 		<link rel="shortcut icon" href="./img/favicon.ico">
