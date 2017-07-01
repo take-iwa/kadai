@@ -36,7 +36,7 @@ if($status==false){
 					<script>
 						// Replace the <textarea id="editor1"> with a CKEditor
 						// instance, using default configuration.
-						CKEDITOR.replace('editor1');
+						CKEDITOR.replace("editor1");
 
 					</script>
 					<input id="submit_button" type="submit" value="投稿">
